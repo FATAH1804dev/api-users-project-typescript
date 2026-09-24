@@ -1,0 +1,69 @@
+{
+  "name": "api_users_project_ts",
+  "version": "1.0.0",
+  "description": "RESTful API project for handling user records, built with Typescript, designed for learning and practice",
+  "keywords": [
+    "restull",
+    "api",
+    "typescript",
+    "expressjs",
+    "zod",
+    "winston",
+    "jest",
+    "bcrypt",
+    "prisma"
+  ],
+  "license": "ISC",
+  "author": "Fathahillah Ath Thariq",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
+  },
+  "overrides": {
+    "mariadb": "3.4.7",
+    "deepmerge-ts": "^8.0.1",
+    "mysql2": "3.23.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
+    "@jest/globals": "^29.7.0",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^26.6.2",
+    "@types/uuid": "^10.0.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "prisma": "^7.10.0",
+    "supertest": "^7.3.0",
+    "ts-jest": "^29.4.12",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "uuid": "^14.0.2",
+    "winston": "^3.19.0",
+    "zod": "^4.6.5"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true,
+    "esbuild@0.28.2": true,
+    "@prisma/engines@7.10.0": true,
+    "prisma@7.10.0": true
+  }
+}
