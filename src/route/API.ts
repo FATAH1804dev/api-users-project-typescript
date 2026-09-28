@@ -8,3 +8,4 @@ apiRouter.use(authMiddleware);
 
 apiRouter.get("/api/users/current", userController.get);
 apiRouter.patch("/api/users/current", userController.update);
+apiRouter.delete("/api/users/current", userController.out);

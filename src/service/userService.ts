@@ -97,4 +97,17 @@ export class UserService {
     });
     return toUserResponse(data);
   }
+
+  static async Out(user: User): Promise<userResponseModel> {
+    const data = await prisma.user.update({
+      where: {
+        username: user.username,
+      },
+      data: {
+        token: null,
+      },
+    });
+
+    return toUserResponse(data);
+  }
 }

@@ -55,4 +55,16 @@ export class userController {
       next(e);
     }
   }
+
+  static async out(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = req.user!;
+      const result = await UserService.Out(user);
+      res.status(200).json({
+        data: `user ${result.username} has been logged out`,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
