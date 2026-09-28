@@ -11,7 +11,9 @@ export class UserTest {
   static async deleteUsers() {
     await prisma.user.deleteMany({
       where: {
-        name: "test",
+        name: {
+          contains: "test",
+        },
       },
     });
   }
@@ -42,13 +44,10 @@ export class UserTest {
       where: {
         name: "test",
       },
-      select: {
-        token: true,
-      },
     });
     if (!user) {
       throw new Error("User not found");
     }
-    return user.token;
+    return user;
   }
 }

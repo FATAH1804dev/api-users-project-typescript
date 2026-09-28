@@ -17,6 +17,11 @@ export type userLoginModel = {
   password: string;
 };
 
+export type userUpdateModel = {
+  password?: string;
+  name?: string;
+};
+
 declare global {
   namespace Express {
     interface Request {

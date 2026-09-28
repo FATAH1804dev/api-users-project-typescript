@@ -1,5 +1,9 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { type userRegisterModel, type userLoginModel } from "../model/user";
+import {
+  type userRegisterModel,
+  type userLoginModel,
+  type userUpdateModel,
+} from "../model/user";
 import { UserService } from "../service/userService";
 
 export class userController {
@@ -29,8 +33,21 @@ export class userController {
 
   static async get(req: Request, res: Response, next: NextFunction) {
     try {
-      const request = req.user!;
-      const result = await UserService.Get(request);
+      const user = req.user!;
+      const result = await UserService.Get(user);
+      res.status(200).json({
+        data: result,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = req.user!;
+      const request: userUpdateModel = req.body as userUpdateModel;
+      const result = await UserService.Update(user, request);
       res.status(200).json({
         data: result,
       });

@@ -3,6 +3,7 @@ import {
   type userRegisterModel,
   type userLoginModel,
   type userResponseModel,
+  type userUpdateModel,
 } from "../model/user";
 import { Validation } from "../validation/validation";
 import { UserValidation } from "../validation/user";
@@ -73,5 +74,27 @@ export class UserService {
   }
   static async Get(user: User): Promise<userResponseModel> {
     return toUserResponse(user);
+  }
+
+  static async Update(
+    user: User,
+    req: userUpdateModel,
+  ): Promise<userResponseModel> {
+    const validRequest = Validation.validate(UserValidation.update, req);
+
+    if (validRequest.name) {
+      user.name = validRequest.name;
+    }
+    if (validRequest.password) {
+      user.password = await bcrypt.hash(validRequest.password, 10);
+    }
+
+    const data = await prisma.user.update({
+      where: {
+        username: user.username,
+      },
+      data: user,
+    });
+    return toUserResponse(data);
   }
 }

@@ -17,9 +17,9 @@ describe("POST /api/users/current", () => {
   });
 
   it("should be able to get user", async () => {
-    const token = await UserTest.getUser();
+    const user = await UserTest.getUser();
     const app = await supertest(web).get("/api/users/current").set({
-      "X-API-TOKEN": token!,
+      "X-API-TOKEN": user.token!,
     });
 
     logger.info(app.body);
@@ -30,7 +30,7 @@ describe("POST /api/users/current", () => {
   });
 
   it("should reject get user if token is invalid", async () => {
-    // const token = await UserTest.getUser();
+    // const user = await UserTest.getUser();
     const app = await supertest(web).get("/api/users/current").set({
       "X-API-TOKEN": "salah",
     });
