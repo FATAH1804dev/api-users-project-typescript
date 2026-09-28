@@ -12,6 +12,11 @@ export type userRegisterModel = {
   name: string;
 };
 
+export type userLoginModel = {
+  username: string;
+  password: string;
+};
+
 export function toUserResponse(user: User): userResponseModel {
   return {
     name: user.name,
