@@ -26,4 +26,16 @@ export class userController {
       next(e);
     }
   }
+
+  static async get(req: Request, res: Response, next: NextFunction) {
+    try {
+      const request = req.user!;
+      const result = await UserService.Get(request);
+      res.status(200).json({
+        data: result,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }

@@ -10,6 +10,7 @@ import { prisma } from "../application/database";
 import bcrypt from "bcrypt";
 import { ResponseError } from "../error/response";
 import { v4 as uuid } from "uuid";
+import type { User } from "../../generated/prisma/client";
 
 export class UserService {
   static async Register(req: userRegisterModel): Promise<userResponseModel> {
@@ -69,5 +70,8 @@ export class UserService {
     response.token = loggedInUser.token!;
 
     return response;
+  }
+  static async Get(user: User): Promise<userResponseModel> {
+    return toUserResponse(user);
   }
 }

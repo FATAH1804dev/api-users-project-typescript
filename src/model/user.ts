@@ -17,6 +17,14 @@ export type userLoginModel = {
   password: string;
 };
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+  }
+}
+
 export function toUserResponse(user: User): userResponseModel {
   return {
     name: user.name,
