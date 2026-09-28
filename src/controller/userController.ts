@@ -4,11 +4,11 @@ import { UserService } from "../service/userService";
 
 export class userController {
   static async register(req: Request, res: Response, next: NextFunction) {
-    const request: userRegisterModel = req.body as userRegisterModel;
-    const result = await UserService.Register(request);
     try {
+      const request: userRegisterModel = req.body as userRegisterModel;
+      const result = await UserService.Register(request);
       res.status(200).json({
-        data: request,
+        data: result,
       });
     } catch (e) {
       next(e);

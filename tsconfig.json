@@ -1,6 +1,6 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
-  "include": ["src/**/*", "lib/**/*.ts", "prisma7.config.ts"],
+  "include": ["src/**/*", "lib/**/*.ts", "prisma7.config.ts", "test"],
   "compilerOptions": {
     // File Layout
     "rootDir": ".",
