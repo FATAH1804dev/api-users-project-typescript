@@ -1,5 +1,6 @@
 import type { User } from "../../generated/prisma/client";
 import { prisma } from "../application/database";
+import { ResponseError } from "../error/response";
 import {
   toContactResponse,
   type modelCreateContact,
@@ -30,5 +31,22 @@ export class contactServices {
     });
 
     return toContactResponse(newContact);
+  }
+
+  static async Get(
+    user: User,
+    contactId: number,
+  ): Promise<modelResponseContact> {
+    const checkContact = await prisma.contact.findUnique({
+      where: {
+        id: contactId,
+        username: user.username,
+      },
+    });
+    if (!checkContact) {
+      throw new ResponseError(404, "contact not found");
+    }
+
+    return toContactResponse(checkContact);
   }
 }

@@ -2,6 +2,7 @@ import { prisma } from "../src/application/database";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
 import type { User } from "../generated/prisma/client";
+import { ResponseError } from "../src/error/response";
 
 export const disconnect = async () => {
   await prisma.$disconnect();
@@ -59,5 +60,29 @@ export class ContactTest {
         firstname: "test",
       },
     });
+  }
+
+  static async createContact() {
+    await prisma.contact.create({
+      data: {
+        firstname: "test",
+        lastname: "Yory",
+        email: "yory432@gmail.com",
+        phone: "625648839243",
+        username: "Ruzcen",
+      },
+    });
+  }
+
+  static async getContact() {
+    const contact = await prisma.contact.findFirst({
+      where: {
+        firstname: "test",
+      },
+    });
+    if (!contact) {
+      throw new Error("contact not found");
+    }
+    return contact;
   }
 }
