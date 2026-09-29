@@ -1,5 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
-import type { modelCreateContact, modelUpdateContact } from "../model/contact";
+import type {
+  modelCreateContact,
+  modelSearchContact,
+  modelUpdateContact,
+} from "../model/contact";
 import { contactServices } from "../service/contactService";
 
 export class ContactController {
@@ -52,6 +56,23 @@ export class ContactController {
       res.status(200).json({
         data: `contact user ${result.firstname} with id ${result.id} has been removed`,
       });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async search(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = req.user!;
+      const request: modelSearchContact = {
+        name: req.query.name as string,
+        email: req.query.email as string,
+        phone: req.query.phone as string,
+        page: req.query.page ? Number(req.query.page) : 1,
+        size: req.query.page ? Number(req.query.size) : 10,
+      };
+      const result = await contactServices.Search(user, request);
+      res.status(200).json(result);
     } catch (e) {
       next(e);
     }

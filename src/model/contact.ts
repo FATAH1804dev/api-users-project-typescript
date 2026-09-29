@@ -23,6 +23,25 @@ export type modelUpdateContact = {
   phone?: string;
 };
 
+export type modelSearchContact = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  page: number;
+  size: number;
+};
+
+type page = {
+  current_page: number;
+  total_page: number;
+  size: number;
+};
+
+export type modelResponseSearchContact = {
+  data: Array<modelResponseContact>;
+  paging: page;
+};
+
 declare global {
   namespace Express {
     interface Request {

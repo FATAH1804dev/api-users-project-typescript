@@ -5,6 +5,8 @@ import {
   toContactResponse,
   type modelCreateContact,
   type modelResponseContact,
+  type modelResponseSearchContact,
+  type modelSearchContact,
   type modelUpdateContact,
 } from "../model/contact";
 import { ContactValidation } from "../validation/contact";
@@ -51,7 +53,6 @@ export class contactServices {
     user: User,
     contactId: number,
   ): Promise<modelResponseContact> {
-    console.info(contactId);
     const existContact = await this.checkContact(user, contactId);
 
     return toContactResponse(existContact);
@@ -102,5 +103,72 @@ export class contactServices {
     });
 
     return toContactResponse(removedContact);
+  }
+
+  static async Search(
+    user: User,
+    req: modelSearchContact,
+  ): Promise<modelResponseSearchContact> {
+    const validRequest = Validation.validate(ContactValidation.search, req);
+    const filter = [];
+    if (validRequest.name) {
+      filter.push({
+        OR: [
+          {
+            firstname: {
+              contains: validRequest.name,
+            },
+          },
+          {
+            lastname: {
+              contains: validRequest.name,
+            },
+          },
+        ],
+      });
+    }
+
+    if (validRequest.email) {
+      filter.push({
+        email: { contains: validRequest.email },
+      });
+    }
+
+    if (validRequest.phone) {
+      filter.push({
+        phone: { contains: validRequest.phone },
+      });
+    }
+
+    const searchContacts = await prisma.contact.findMany({
+      where: {
+        username: user.username,
+        AND: filter,
+      },
+      skip: (validRequest.page - 1) * validRequest.size,
+      take: validRequest.size,
+    });
+
+    const totalContact = await prisma.contact.count({
+      where: {
+        username: user.username,
+        AND: filter,
+      },
+    });
+
+    const perContact = searchContacts.map((contact) =>
+      toContactResponse(contact),
+    );
+
+    const response = {
+      data: perContact,
+      paging: {
+        current_page: validRequest.page,
+        total_page: Math.ceil(totalContact / validRequest.size),
+        size: validRequest.size,
+      },
+    };
+
+    return response;
   }
 }
