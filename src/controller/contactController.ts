@@ -43,4 +43,17 @@ export class ContactController {
       next(e);
     }
   }
+
+  static async remove(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = req.user!;
+      const contactId = Number(req.params.contactId);
+      const result = await contactServices.Get(user, contactId);
+      res.status(200).json({
+        data: `contact user ${result.firstname} with id ${result.id} has been removed`,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
