@@ -4,4 +4,5 @@
 -- DESCRIBE users
 -- DESCRIBE contacts
 
-SELECT * FROM users
+-- SELECT * FROM users
+SELECT * FROM contacts

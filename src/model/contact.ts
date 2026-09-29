@@ -15,6 +15,14 @@ export type modelCreateContact = {
   phone: string;
 };
 
+export type modelUpdateContact = {
+  id: number;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  phone?: string;
+};
+
 declare global {
   namespace Express {
     interface Request {
