@@ -144,4 +144,20 @@ export class AddressServices {
 
     return toAddressResponse(response);
   }
+
+  static async List(
+    user: User,
+    contactId: number,
+  ): Promise<Array<modelAddressResponse>> {
+    const existContact = await contactServices.checkContact(user, contactId);
+
+    const addresses = await prisma.address.findMany({
+      where: {
+        id_contact: existContact.id,
+      },
+    });
+    const perAddress = addresses.map((address) => toAddressResponse(address));
+
+    return perAddress;
+  }
 }
