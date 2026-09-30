@@ -18,6 +18,16 @@ export type modelAddressCreate = {
   contactId: number;
 };
 
+export type modelAddressUpdate = {
+  street?: string;
+  city?: string;
+  province?: string;
+  country: string;
+  postal_code: string;
+  contactId: number;
+  id: number;
+};
+
 export type modelIdRequest = {
   contactId: number;
   id: number;

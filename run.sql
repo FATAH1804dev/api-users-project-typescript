@@ -1,8 +1,9 @@
 -- show tables
 
-DESCRIBE addresses
+-- DESCRIBE addresses
 -- DESCRIBE users
 -- DESCRIBE contacts
 
 -- SELECT * FROM users
 -- SELECT * FROM contacts
+SELECT * FROM addresses

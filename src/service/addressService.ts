@@ -6,6 +6,7 @@ import {
   toAddressResponse,
   type modelAddressCreate,
   type modelAddressResponse,
+  type modelAddressUpdate,
   type modelIdRequest,
 } from "../model/address";
 import { AddressValidation } from "../validation/address";
@@ -74,6 +75,47 @@ export class AddressServices {
       validRequest.contactId,
       validRequest.id,
     );
+
+    return toAddressResponse(response);
+  }
+
+  static async Update(
+    user: User,
+    req: modelAddressUpdate,
+  ): Promise<modelAddressResponse> {
+    const validRequest = Validation.validate(AddressValidation.update, req);
+    const existContact = await contactServices.checkContact(
+      user,
+      req.contactId,
+    );
+    const existAddress = await this.checkAddress(
+      existContact.username,
+      validRequest.contactId,
+      validRequest.id,
+    );
+
+    const response = await prisma.address.update({
+      where: {
+        id: existAddress.id,
+      },
+      data: {
+        ...(validRequest.street !== undefined
+          ? { street: validRequest.street }
+          : {}),
+        ...(validRequest.city !== undefined ? { city: validRequest.city } : {}),
+        ...(validRequest.province !== undefined
+          ? { province: validRequest.province }
+          : {}),
+        ...(validRequest.country !== undefined && validRequest.country !== null
+          ? { country: validRequest.country }
+          : {}),
+        ...(validRequest.postal_code !== undefined &&
+        validRequest.postal_code !== null
+          ? { postal_code: validRequest.postal_code }
+          : {}),
+      },
+    });
+    console.info(response);
 
     return toAddressResponse(response);
   }
