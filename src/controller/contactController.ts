@@ -3,8 +3,8 @@ import type {
   modelCreateContact,
   modelSearchContact,
   modelUpdateContact,
-} from "../model/contact";
-import { contactServices } from "../service/contactService";
+} from "../model/contact.ts";
+import { contactServices } from "../service/contactService.ts";
 
 export class ContactController {
   static async create(req: Request, res: Response, next: NextFunction) {
@@ -52,7 +52,7 @@ export class ContactController {
     try {
       const user = req.user!;
       const contactId = Number(req.params.contactId);
-      const result = await contactServices.Get(user, contactId);
+      const result = await contactServices.Remove(user, contactId);
       res.status(200).json({
         data: `contact user ${result.firstname} with id ${result.id} has been removed`,
       });
@@ -69,7 +69,7 @@ export class ContactController {
         email: req.query.email as string,
         phone: req.query.phone as string,
         page: req.query.page ? Number(req.query.page) : 1,
-        size: req.query.page ? Number(req.query.size) : 10,
+        size: req.query.size ? Number(req.query.size) : 10,
       };
       const result = await contactServices.Search(user, request);
       res.status(200).json(result);

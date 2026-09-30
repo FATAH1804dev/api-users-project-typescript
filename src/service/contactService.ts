@@ -1,6 +1,6 @@
 import type { Contact, User } from "../../generated/prisma/client";
-import { prisma } from "../application/database";
-import { ResponseError } from "../error/response";
+import { prisma } from "../application/database.ts";
+import { ResponseError } from "../error/response.ts";
 import {
   toContactResponse,
   type modelCreateContact,
@@ -8,9 +8,9 @@ import {
   type modelResponseSearchContact,
   type modelSearchContact,
   type modelUpdateContact,
-} from "../model/contact";
-import { ContactValidation } from "../validation/contact";
-import { Validation } from "../validation/validation";
+} from "../model/contact.ts";
+import { ContactValidation } from "../validation/contact.ts";
+import { Validation } from "../validation/validation.ts";
 
 export class contactServices {
   static async Create(

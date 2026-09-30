@@ -4,12 +4,12 @@ import {
   type userLoginModel,
   type userResponseModel,
   type userUpdateModel,
-} from "../model/user";
-import { Validation } from "../validation/validation";
-import { UserValidation } from "../validation/user";
-import { prisma } from "../application/database";
+} from "../model/user.ts";
+import { Validation } from "../validation/validation.ts";
+import { UserValidation } from "../validation/user.ts";
+import { prisma } from "../application/database.ts";
 import bcrypt from "bcrypt";
-import { ResponseError } from "../error/response";
+import { ResponseError } from "../error/response.ts";
 import { v4 as uuid } from "uuid";
 import type { User } from "../../generated/prisma/client";
 

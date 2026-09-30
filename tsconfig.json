@@ -43,7 +43,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true,
-    "noEmit": true
+    "erasableSyntaxOnly": true
   }
 }

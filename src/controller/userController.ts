@@ -3,8 +3,8 @@ import {
   type userRegisterModel,
   type userLoginModel,
   type userUpdateModel,
-} from "../model/user";
-import { UserService } from "../service/userService";
+} from "../model/user.ts";
+import { UserService } from "../service/userService.ts";
 
 export class userController {
   static async register(req: Request, res: Response, next: NextFunction) {

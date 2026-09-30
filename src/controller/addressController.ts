@@ -3,8 +3,8 @@ import type {
   modelAddressCreate,
   modelAddressUpdate,
   modelIdRequest,
-} from "../model/address";
-import { AddressServices } from "../service/addressService";
+} from "../model/address.ts";
+import { AddressServices } from "../service/addressService.ts";
 
 export class AddressController {
   static async create(req: Request, res: Response, next: NextFunction) {

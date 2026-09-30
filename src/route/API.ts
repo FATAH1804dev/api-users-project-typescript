@@ -1,8 +1,8 @@
 import express from "express";
-import { userController } from "../controller/userController";
-import { authMiddleware } from "../middleware/authMiddleware";
-import { ContactController } from "../controller/contactController";
-import { AddressController } from "../controller/addressController";
+import { userController } from "../controller/userController.ts";
+import { authMiddleware } from "../middleware/authMiddleware.ts";
+import { ContactController } from "../controller/contactController.ts";
+import { AddressController } from "../controller/addressController.ts";
 
 export const apiRouter = express.Router();
 

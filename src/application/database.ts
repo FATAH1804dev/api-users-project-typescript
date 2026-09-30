@@ -1,6 +1,6 @@
-import { adapter } from "../../lib/prisma";
-import { PrismaClient } from "../../generated/prisma/client";
-import { logger } from "./logging";
+import { adapter } from "../../lib/prisma.ts";
+import { PrismaClient } from "../../generated/prisma/client.ts";
+import { logger } from "./logging.ts";
 
 export const prisma = new PrismaClient({
   adapter,

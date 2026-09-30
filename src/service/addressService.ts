@@ -1,17 +1,16 @@
-import { add } from "winston";
 import type { Address, User } from "../../generated/prisma/client";
-import { prisma } from "../application/database";
-import { ResponseError } from "../error/response";
+import { prisma } from "../application/database.ts";
+import { ResponseError } from "../error/response.ts";
 import {
   toAddressResponse,
   type modelAddressCreate,
   type modelAddressResponse,
   type modelAddressUpdate,
   type modelIdRequest,
-} from "../model/address";
-import { AddressValidation } from "../validation/address";
-import { Validation } from "../validation/validation";
-import { contactServices } from "./contactService";
+} from "../model/address.ts";
+import { AddressValidation } from "../validation/address.ts";
+import { Validation } from "../validation/validation.ts";
+import { contactServices } from "./contactService.ts";
 
 export class AddressServices {
   static async Create(

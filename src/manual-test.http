@@ -1,0 +1,124 @@
+### user register
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username" : "John",
+    "password" : "rahasia456",
+    "name" : "John kennedy"
+
+}
+### user login
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username" : "John",
+    "password" : "rahasia456"
+}
+
+### user get
+GET http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### user update
+PATCH  http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 6932eb55-2ac2-4906-ba54-f2f6c5370331
+
+{
+    "password" : "rahasia1257"
+}
+
+### user logout
+DELETE   http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### contact create
+POST http://localhost:3000/api/contacts
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+{
+    "firstname": "John",
+    "lastname": "Ruzcsen",
+    "email": "ruzs579@gmail.com",
+    "phone": "623458892768"
+
+}
+### contact get
+GET http://localhost:3000/api/contacts/391
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### contact update
+PUT http://localhost:3000/api/contacts/391
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: b06276fb-1aa7-4d0c-99b6-c19225331df8
+
+{
+    "firstname": "John",
+    "lastname": "Ruzcen",
+    "email": "ruzc4876@gmail.com",
+    "phone": "6243276638997"
+
+}
+
+### contact search
+GET http://localhost:3000/api/contacts
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### contact remove
+DELETE  http://localhost:3000/api/contacts/391
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### address create
+POST http://localhost:3000/api/contacts/390/addresses
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+{
+    "street": "Waauyizyu .st",
+    "city": "Poiyu",
+    "province": "Ozxyu",
+    "country": "Lasduf",
+    "postal_code": "443827"
+
+}
+
+### address update
+PUT http://localhost:3000/api/contacts/390/addresses/139
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+{
+    "street": "Mytuvbytl .st",
+    "postal_code": "887213"
+
+}
+
+### address get
+GET http://localhost:3000/api/contacts/390/addresses/136
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### address remove
+DELETE http://localhost:3000/api/contacts/390/addresses/138
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
+
+### address list
+GET http://localhost:3000/api/contacts/390/addresses
+Accept: application/json
+X-API-TOKEN: ae5ba68a-56d3-4ffc-8926-4510d0d35ea3
