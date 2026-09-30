@@ -77,8 +77,10 @@ export class ContactTest {
   }
 
   static async getContact() {
+    const user = await UserTest.getUser();
     const contact = await prisma.contact.findFirst({
       where: {
+        username: user.username,
         firstname: "test",
       },
     });
@@ -86,5 +88,45 @@ export class ContactTest {
       throw new Error("contact not found");
     }
     return contact;
+  }
+}
+
+export class AddressTest {
+  static async deleteAll() {
+    await prisma.address.deleteMany({
+      where: {
+        country: {
+          contains: "test",
+        },
+      },
+    });
+  }
+
+  static async createAddress() {
+    const contact = await ContactTest.getContact();
+    await prisma.address.create({
+      data: {
+        street: "Capoyurwyerns .st",
+        city: "Kcysyl",
+        province: "Tednuock",
+        country: "test",
+        postal_code: "244764",
+        id_contact: contact.id,
+      },
+    });
+  }
+
+  static async getAddress() {
+    const contact = await ContactTest.getContact();
+    const address = await prisma.address.findFirst({
+      where: {
+        id_contact: contact.id,
+        country: "test",
+      },
+    });
+    if (!address) {
+      throw new Error("address not found");
+    }
+    return address;
   }
 }
