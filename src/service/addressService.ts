@@ -119,4 +119,29 @@ export class AddressServices {
 
     return toAddressResponse(response);
   }
+
+  static async Remove(
+    user: User,
+    idReq: modelIdRequest,
+  ): Promise<modelAddressResponse> {
+    const validRequest = Validation.validate(AddressValidation.remove, idReq);
+    const existContact = await contactServices.checkContact(
+      user,
+      idReq.contactId,
+    );
+
+    const existAddress = await this.checkAddress(
+      existContact.username,
+      validRequest.contactId,
+      validRequest.id,
+    );
+
+    const response = await prisma.address.delete({
+      where: {
+        id: existAddress.id,
+      },
+    });
+
+    return toAddressResponse(response);
+  }
 }

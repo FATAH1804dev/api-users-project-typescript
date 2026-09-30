@@ -3,7 +3,7 @@ import { disconnect, UserTest, ContactTest, AddressTest } from "./util";
 import supertest from "supertest";
 import { logger } from "../src/application/logging";
 
-describe("PUT /api/contacts/:contactId/addresses", () => {
+describe("POST /api/contacts/:contactId/addresses", () => {
   beforeEach(async () => {
     await UserTest.loggedInUser();
     await ContactTest.createContact();

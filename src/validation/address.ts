@@ -24,4 +24,8 @@ export class AddressValidation {
     contactId: z.number().positive(),
     id: z.number().positive(),
   });
+  static readonly remove = z.object({
+    contactId: z.number().positive(),
+    id: z.number().positive(),
+  });
 }

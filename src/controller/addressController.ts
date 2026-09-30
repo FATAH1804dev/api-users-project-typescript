@@ -56,4 +56,22 @@ export class AddressController {
       next(e);
     }
   }
+
+  static async remove(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = req.user!;
+      const contactId = Number(req.params.contactId);
+      const id = Number(req.params.addressId);
+      const request: modelIdRequest = {
+        contactId: contactId,
+        id: id,
+      };
+      const result = await AddressServices.Remove(user, request);
+      res.status(200).json({
+        data: `address-${result.id} has been removed`,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
