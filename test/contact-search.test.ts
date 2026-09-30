@@ -19,7 +19,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!);
@@ -35,7 +35,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact using name", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!)
@@ -52,7 +52,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact using email", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!)
@@ -69,7 +69,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact using phone", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!)
@@ -86,7 +86,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact but no result", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!)
@@ -102,7 +102,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able search contact with paging", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .get(`/api/contacts`)
       .set("X-API-TOKEN", user.token!)

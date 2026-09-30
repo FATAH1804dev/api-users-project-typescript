@@ -19,8 +19,8 @@ describe("PUT /api/contacts/:contactId", () => {
   });
 
   it("should be able to update contact", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .put(`/api/contacts/${contact.id}`)
       .set("X-API-TOKEN", user.token!)
@@ -42,8 +42,8 @@ describe("PUT /api/contacts/:contactId", () => {
   });
 
   it("should be able to update contact partial", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .put(`/api/contacts/${contact.id}`)
       .set("X-API-TOKEN", user.token!)
@@ -63,8 +63,8 @@ describe("PUT /api/contacts/:contactId", () => {
   });
 
   it("shouldreject update contact if request is invalid", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .put(`/api/contacts/${contact.id}`)
       .set("X-API-TOKEN", user.token!)

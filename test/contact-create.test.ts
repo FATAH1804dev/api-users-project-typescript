@@ -18,7 +18,7 @@ describe("POST /api/contacts", () => {
   });
 
   it("should create new contact", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .post("/api/contacts")
       .set("X-API-TOKEN", user.token!)
@@ -39,7 +39,7 @@ describe("POST /api/contacts", () => {
   });
 
   it("should reject create new contact if data is invalid", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .post("/api/contacts")
       .set("X-API-TOKEN", user.token!)

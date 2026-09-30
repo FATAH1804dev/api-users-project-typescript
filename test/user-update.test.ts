@@ -18,7 +18,7 @@ describe("PATCH /api/users/current", () => {
   });
 
   it("should reject update user if request is invalid", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .patch("/api/users/current")
       .set({
@@ -29,14 +29,13 @@ describe("PATCH /api/users/current", () => {
         password: "",
       });
 
-    logger.info(app.body.errors);
+    console.info(app.body.errors);
 
     expect(app.status).toBe(400);
     expect(app.body.errors).toBeDefined();
   });
 
   it("should reject update user if token is wrong", async () => {
-    // const user = await UserTest.getUser();
     const app = await supertest(web)
       .patch("/api/users/current")
       .set({
@@ -47,14 +46,14 @@ describe("PATCH /api/users/current", () => {
         password: "benar",
       });
 
-    logger.info(app.body.errors);
+    console.info(app.body.errors);
 
     expect(app.status).toBe(401);
     expect(app.body.errors).toBeDefined();
   });
 
   it("should be able to update name", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .patch("/api/users/current")
       .set({
@@ -64,7 +63,7 @@ describe("PATCH /api/users/current", () => {
         name: "test lagi",
       });
 
-    logger.info(app.body);
+    console.info(app.body);
 
     expect(app.status).toBe(200);
     expect(app.body.data.username).toBe("Ruzcen");
@@ -72,7 +71,7 @@ describe("PATCH /api/users/current", () => {
   });
 
   it("should be able to update password", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web)
       .patch("/api/users/current")
       .set({
@@ -84,7 +83,7 @@ describe("PATCH /api/users/current", () => {
 
     logger.info(app.body);
 
-    const updatedUser = await UserTest.getUser();
+    const updatedUser = await UserTest.getUser("test");
 
     expect(app.status).toBe(200);
     expect(app.body.data.username).toBe("Ruzcen");

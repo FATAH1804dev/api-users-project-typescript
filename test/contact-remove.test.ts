@@ -19,8 +19,8 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should be able to remove contact", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .delete(`/api/contacts/${contact.id}`)
       .set("X-API-TOKEN", user.token!);
@@ -34,8 +34,8 @@ describe("GET /api/contacts/:contactId", () => {
   });
 
   it("should reject remove contact if contact is not found", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .delete(`/api/contacts/${contact.id + 1}`)
       .set("X-API-TOKEN", user.token!);

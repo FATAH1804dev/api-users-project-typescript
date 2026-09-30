@@ -20,8 +20,8 @@ describe("PUT /api/contacts/:contactId/addresses", () => {
   });
 
   it("should be able to create address", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .post(`/api/contacts/${contact.id}/addresses`)
       .set("X-API-TOKEN", user.token!)
@@ -34,7 +34,7 @@ describe("PUT /api/contacts/:contactId/addresses", () => {
       });
 
     console.info(app.body);
-    const address = await AddressTest.getAddress();
+    const address = await AddressTest.getAddress("Ruzcen", contact.id, "test");
 
     expect(app.status).toBe(200);
     expect(app.body.data.id).toBe(address.id);
@@ -45,8 +45,8 @@ describe("PUT /api/contacts/:contactId/addresses", () => {
   });
 
   it("should reject create new address if request is invalid", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .post(`/api/contacts/${contact.id}/addresses`)
       .set("X-API-TOKEN", user.token!)
@@ -63,8 +63,8 @@ describe("PUT /api/contacts/:contactId/addresses", () => {
   });
 
   it("should reject create new address if contact is not found", async () => {
-    const user = await UserTest.getUser();
-    const contact = await ContactTest.getContact();
+    const user = await UserTest.getUser("test");
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     const app = await supertest(web)
       .post(`/api/contacts/${contact.id + 1}/addresses`)
       .set("X-API-TOKEN", user.token!)

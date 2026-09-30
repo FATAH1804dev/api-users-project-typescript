@@ -40,10 +40,10 @@ export class UserTest {
     });
   }
 
-  static async getUser() {
+  static async getUser(name: string) {
     const user = await prisma.user.findFirst({
       where: {
-        name: "test",
+        name: { contains: name },
       },
     });
     if (!user) {
@@ -76,12 +76,11 @@ export class ContactTest {
     });
   }
 
-  static async getContact() {
-    const user = await UserTest.getUser();
+  static async getContact(username: string, firstname: string) {
     const contact = await prisma.contact.findFirst({
       where: {
-        username: user.username,
-        firstname: "test",
+        username: username,
+        firstname: { contains: firstname },
       },
     });
     if (!contact) {
@@ -103,7 +102,7 @@ export class AddressTest {
   }
 
   static async createAddress() {
-    const contact = await ContactTest.getContact();
+    const contact = await ContactTest.getContact("Ruzcen", "test");
     await prisma.address.create({
       data: {
         street: "Capoyurwyerns .st",
@@ -116,12 +115,16 @@ export class AddressTest {
     });
   }
 
-  static async getAddress() {
-    const contact = await ContactTest.getContact();
+  static async getAddress(
+    username: string,
+    contactId: number,
+    country: string,
+  ) {
     const address = await prisma.address.findFirst({
       where: {
-        id_contact: contact.id,
-        country: "test",
+        contact: { username: username },
+        id_contact: contactId,
+        country: { contains: country },
       },
     });
     if (!address) {

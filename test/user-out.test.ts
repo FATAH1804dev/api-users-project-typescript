@@ -17,14 +17,14 @@ describe("DELETE /api/users/current", () => {
   });
 
   it("should be able to logout", async () => {
-    const user = await UserTest.getUser();
+    const user = await UserTest.getUser("test");
     const app = await supertest(web).delete("/api/users/current").set({
       "X-API-TOKEN": user.token!,
     });
 
     logger.info(app.body.data);
 
-    const loggedOutUser = await UserTest.getUser();
+    const loggedOutUser = await UserTest.getUser("test");
 
     expect(app.status).toBe(200);
     expect(app.body.data).toBe("user Ruzcen has been logged out");
