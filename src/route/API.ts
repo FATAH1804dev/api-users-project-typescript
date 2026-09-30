@@ -22,3 +22,7 @@ apiRouter.get("/api/contacts", ContactController.search);
 
 //addresses api
 apiRouter.post("/api/contacts/:contactId/addresses", AddressController.create);
+apiRouter.get(
+  "/api/contacts/:contactId/addresses/:addressId",
+  AddressController.get,
+);

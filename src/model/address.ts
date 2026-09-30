@@ -18,6 +18,11 @@ export type modelAddressCreate = {
   contactId: number;
 };
 
+export type modelIdRequest = {
+  contactId: number;
+  id: number;
+};
+
 declare global {
   namespace Express {
     interface Request {
